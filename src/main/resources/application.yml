@@ -1,0 +1,45 @@
+#设置后端服务器端口
+server:
+  port: 8086
+  servlet:
+    #默认项目部署路径
+    context-path:
+#数据库连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yuyue?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+  #json解析设置
+  jackson:
+    serialization:
+      indent_output: true
+mybatis:
+  #定义别名使用的包名
+  type-aliases-package: com.newer.yuyue.domain
+  #定义映射文件的位置
+  mapper-locations: mapper/*.xml
+  #开启驼峰命名法自动映射
+  configuration:
+    map-underscore-to-camel-case: true
+#定义日志输出级别
+logging:
+  level:
+    com.newer.hospital.mapper: debug
+    org.springframework.security: info
+jwt:
+  #指定token在请求头部署属性号
+  header: Authorization
+  #自定义的口令名
+  secret: mySecret
+  #失效时间：7天
+  expiration: 604800
+  #承载字符串
+  tokenHead: Bearer
+  #路径设置
+  route:
+    authentication:
+      #获得token的访问路径==登录的路径
+      path: /auth
+      refresh: /refresh

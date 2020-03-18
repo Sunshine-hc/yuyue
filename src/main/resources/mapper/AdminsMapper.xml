@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newer.hospital.mapper.AdminsMapper">
+
+  <!--开启二级缓存（xml跟注解只能用一种）-->
+<!--  <cache type="com.newer.hospital.util.RedisCache"/>-->
+
+  <resultMap id="result-admins" type="Admins">
+    <id property="aid" column="aid" />
+    <result property="aname" column="aname"/>
+    <result property="pwd" column="pwd"/>
+    <result property="state" column="state"/>
+    <result property="aexist" column="aexist"/>
+    <result property="email" column="email"/>
+    <result property="lastPasswordResetDate" column="lastPasswordResetDate"/>
+    <result property="doid" column="doid"/>
+    <result property="by1" column="by1"/>
+    <result property="loginTime" column="login_time"/>
+    <collection property="authorities" ofType="Authority">
+      <id property="id" column="id" />
+      <result property="name" column="name"/>
+    </collection>
+  </resultMap>
+
+  <select id="findByUsername" resultMap="result-admins">
+    select ad.aid,ad.aname,ad.pwd,ad.state,ad.aexist,ad.email,ad.lastPasswordResetDate,ad.doid,
+    ad.by1,ad.login_time,au.id,au.name
+    from admins ad,AUTHORITY au,USER_AUTHORITY ua
+    where ad.aname=#{aname} and ad.aid = ua.USER_ID and ua.AUTHORITY_ID = au.id
+  </select>
+</mapper>
