@@ -5,7 +5,7 @@ import com.newer.yuyue.security.JwtAuthenticationRequest;
 import com.newer.yuyue.security.JwtAuthenticationResponse;
 import com.newer.yuyue.security.JwtTokenUtil;
 import com.newer.yuyue.security.domain.JwtUser;
-import com.newer.yuyue.server.UserInfoServer;
+import com.newer.yuyue.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class AuthenticationRestController {
   private UserDetailsService userDetailsService;
 
   @Autowired
-  private UserInfoServer userInfoServer;
+  private UserInfoService userInfoService;
 
   /**
    * 创建授权令牌 (登录)

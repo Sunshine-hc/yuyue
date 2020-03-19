@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newer.yuyue.mapper.UserInfoMapper">
+
+  <!--开启二级缓存（xml跟注解只能用一种）-->
+<!--  <cache type="com.newer.hospital.util.RedisCache"/>-->
+
+  <resultMap id="result-admins" type="UserInfo">
+    <id property="userid" column="userid" />
+    <result property="phone" column="phone"/>
+    <result property="pwd" column="pwd"/>
+    <result property="nickname" column="nickname"/>
+    <result property="realname" column="realname"/>
+    <result property="uidcard" column="uidcard"/>
+    <result property="email" column="email"/>
+    <result property="uimage" column="uimage"/>
+    <result property="balance" column="balance"/>
+    <result property="lastPasswordResetDate" column="lastPasswordResetDate"/>
+    <result property="by1" column="by1"/>
+    <result property="by2" column="by2"/>
+    <collection property="authorities" ofType="Authority">
+      <id property="id" column="id" />
+      <result property="name" column="name"/>
+    </collection>
+  </resultMap>
+
+  <select id="findByUsername" resultMap="result-admins">
+    select ui.userid,ui.phone,ui.pwd,ui.nickname,ui.realname,ui.uidcard,ui.email,ui.uimage,
+    ui.balance,ui.lastPasswordResetDate,ui.by1,ui.by2,au.id,au.name
+    from userinfo ui,AUTHORITY au,USER_AUTHORITY ua
+    where ui.phone=#{phone} and ui.userid = ua.USER_ID and ua.AUTHORITY_ID = au.id
+  </select>
+</mapper>

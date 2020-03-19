@@ -1,6 +1,9 @@
 package com.newer.yuyue.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +19,8 @@ public class UserInfo implements Serializable {
     private String email;//邮箱
     private String uimage;//图片（头像）
     private Double balance;//余额
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date lastPasswordResetDate;//最后修改密码时间
     private String by1;//备用
     private String by2;
     private List<Authority> authorities;//用户对于的角色集合
@@ -94,6 +99,18 @@ public class UserInfo implements Serializable {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     public String getBy1() {

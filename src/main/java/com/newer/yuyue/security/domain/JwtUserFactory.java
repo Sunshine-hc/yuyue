@@ -22,6 +22,7 @@ public class JwtUserFactory {
                 userInfo.getEmail(),
                 userInfo.getUimage(),
                 userInfo.getBalance(),
+                userInfo.getLastPasswordResetDate(),
                 userInfo.getBy1(),
                 userInfo.getBy2(),
                 mapToAuthority(userInfo.getAuthorities())

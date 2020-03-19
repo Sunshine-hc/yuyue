@@ -1,9 +1,9 @@
 package com.newer.yuyue.security.config;
 
-import com.newer.hospital.security.JwtAuthenticationEntryPoint;
-import com.newer.hospital.security.JwtAuthenticationTokenFilter;
-import com.newer.hospital.security.JwtTokenUtil;
-import com.newer.hospital.security.service.JwtUserService;
+import com.newer.yuyue.security.JwtAuthenticationEntryPoint;
+import com.newer.yuyue.security.JwtAuthenticationTokenFilter;
+import com.newer.yuyue.security.JwtTokenUtil;
+import com.newer.yuyue.security.service.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         .authorizeRequests()
 
-        .antMatchers("/auth/**","/testError").permitAll()
+        .antMatchers("/auth/**","/zhuce","/testError").permitAll()
         .anyRequest().authenticated();
 
     // Custom JWT based security filter

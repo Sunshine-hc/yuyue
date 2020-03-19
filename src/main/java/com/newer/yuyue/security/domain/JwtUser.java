@@ -22,6 +22,8 @@ public class JwtUser implements UserDetails {
     private final String email;//邮箱
     private final String uimage;//图片（头像）
     private final Double balance;//余额
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date lastPasswordResetDate;//最后修改密码时间
     private final String by1;//备用
     private final String by2;
     private final Collection<? extends GrantedAuthority> authorities;
@@ -29,7 +31,7 @@ public class JwtUser implements UserDetails {
     //带参构造方法
 
 
-    public JwtUser(Integer userid, String phone, String pwd, String nickname, String realname, String uidcard, String email, String uimage, Double balance, String by1, String by2, Collection<? extends GrantedAuthority> authorities) {
+    public JwtUser(Integer userid, String phone, String pwd, String nickname, String realname, String uidcard, String email, String uimage, Double balance, Date lastPasswordResetDate, String by1, String by2, Collection<? extends GrantedAuthority> authorities) {
         this.userid = userid;
         this.phone = phone;
         this.pwd = pwd;
@@ -39,6 +41,7 @@ public class JwtUser implements UserDetails {
         this.email = email;
         this.uimage = uimage;
         this.balance = balance;
+        this.lastPasswordResetDate = lastPasswordResetDate;
         this.by1 = by1;
         this.by2 = by2;
         this.authorities = authorities;
@@ -68,12 +71,20 @@ public class JwtUser implements UserDetails {
         return uidcard;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public String getUimage() {
         return uimage;
     }
 
     public Double getBalance() {
         return balance;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 
     public String getBy2() {
